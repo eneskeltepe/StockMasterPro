@@ -25,7 +25,7 @@ StockMaster Pro, işletmelerin stok, satış ve müşteri yönetimini kolaylaşt
 
 1. Projeyi klonlayın
 ```bash
-git clone https://github.com/yourusername/StockMasterPro.git
+git clone https://github.com/eneskeltepe/StockMasterPro.git
 ```
 
 2. Visual Studio'da projeyi açın
@@ -40,11 +40,13 @@ Update-Database
 5. Projeyi çalıştırın ve tarayıcıda `http://localhost:port` adresine gidin
 
 ## Ekran Görüntüleri
+![Dashboard](https://github.com/user-attachments/assets/71265999-5958-42f0-a30a-c3d3010c09b8)
+![Urunler](https://github.com/user-attachments/assets/452de673-f3ef-4ebc-9b74-a4785fd1eeac)
+![Kategoriler](https://github.com/user-attachments/assets/60a8353b-582d-49dd-9116-aa12e1689397)
+![Musteriler](https://github.com/user-attachments/assets/d0024f4b-ef85-4d22-b99f-c848e50612e3)
+![Satislar](https://github.com/user-attachments/assets/2a66716b-4f28-4754-8032-a44ecd9d0cb7)
+![YeniSatis](https://github.com/user-attachments/assets/0c40bfc8-d487-406c-b7d2-fe44cc58c071)
 
-- Dashboard
-- Ürün Listesi
-- Satış Ekranı
-- Müşteri Yönetimi
 
 ## Lisans
 
