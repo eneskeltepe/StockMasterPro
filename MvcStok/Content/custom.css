@@ -1,0 +1,109 @@
+/* Genel Stiller */
+body {
+    background-color: #f8f9fc;
+}
+
+/* Tablo Stilleri */
+.table {
+    background-color: #fff;
+    border-radius: 0.35rem;
+}
+
+.table th {
+    background-color: #f8f9fc;
+    border-top: none;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fc;
+}
+
+/* Kart Stilleri */
+.card {
+    border: none;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    border-radius: 0.35rem;
+}
+
+.card-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+/* Form Stilleri */
+.form-control {
+    border-radius: 0.35rem;
+    border: 1px solid #d1d3e2;
+}
+
+.form-control:focus {
+    border-color: #bac8f3;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Buton Stilleri */
+.btn {
+    border-radius: 0.35rem;
+    padding: 0.375rem 0.75rem;
+}
+
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+
+.btn-primary:hover {
+    background-color: #2e59d9;
+    border-color: #2653d4;
+}
+
+.btn-success {
+    background-color: #1cc88a;
+    border-color: #1cc88a;
+}
+
+.btn-success:hover {
+    background-color: #17a673;
+    border-color: #169b6b;
+}
+
+.btn-danger {
+    background-color: #e74a3b;
+    border-color: #e74a3b;
+}
+
+.btn-danger:hover {
+    background-color: #be2617;
+    border-color: #be2617;
+}
+
+/* Badge Stilleri */
+.badge {
+    padding: 0.5em 0.75em;
+    font-size: 75%;
+}
+
+.badge-success {
+    background-color: #1cc88a;
+}
+
+.badge-danger {
+    background-color: #e74a3b;
+}
+
+/* Responsive Düzenlemeler */
+@media (max-width: 768px) {
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    .table-responsive {
+        border: 0;
+    }
+}

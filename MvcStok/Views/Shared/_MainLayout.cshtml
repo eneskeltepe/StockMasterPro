@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - StockMaster Pro</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    @RenderSection("Styles", required: false)
+    <style>
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            color: #4e73df !important;
+            font-size: 1.5rem;
+            padding: 0;
+        }
+
+        .brand-logo {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background: #4e73df;
+            background: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+            padding-top: 20px;
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            margin: 0 1rem;
+            border-radius: 0.35rem;
+            font-weight: 500;
+        }
+
+        .sidebar .nav-link:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .nav-link.active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 0.5rem;
+            width: 1.5rem;
+            text-align: center;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        @@media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar position-fixed" style="width: 250px;">
+        <div class="sidebar-brand d-flex align-items-center justify-content-center py-3 mb-2">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-cube fa-2x me-2" style="color: #ffffff;"></i>
+                <div>
+                    <div style="font-family: 'Segoe UI', sans-serif; font-weight: 700; font-size: 1.4rem; color: #ffffff; line-height: 1.2;">
+                        StockMaster<span style="color: #a3c2ff;">Pro</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #a3c2ff; letter-spacing: 2px; text-transform: uppercase;">
+                        Stok Takip Sistemi
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Urun" ? "active" : "")" href="/Urun">
+                    <i class="fas fa-fw fa-box"></i>
+                    Ürünler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Kategori" ? "active" : "")" href="/Kategori">
+                    <i class="fas fa-fw fa-tags"></i>
+                    Kategoriler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Musteri" ? "active" : "")" href="/Musteri">
+                    <i class="fas fa-fw fa-users"></i>
+                    Müşteriler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Satis" ? "active" : "")" href="/Satis">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    Satışlar
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        @if (TempData["Hata"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                @TempData["Hata"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (TempData["Basari"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle me-2"></i>
+                @TempData["Basari"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @RenderBody()
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

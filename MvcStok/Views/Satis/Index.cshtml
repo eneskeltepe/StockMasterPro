@@ -1,0 +1,80 @@
+@using MvcStok.Models.Entity
+@model IEnumerable<TBLSATISLAR>
+@{
+    ViewBag.Title = "Satışlar";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!-- Arama Formu -->
+<div class="card mt-3">
+    <div class="card-body">
+        @using (Html.BeginForm("Index", "Satis", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="input-group w-100">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Satış ara..." })
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Ara
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<table class="table table-bordered mt-3">
+    <tr>
+        <th>Satış ID</th>
+        <th>Ürün</th>
+        <th>Kategori</th>
+        <th>Müşteri</th>
+        <th>Adet</th>
+        <th>Birim Fiyat</th>
+        <th>Toplam Tutar</th>
+        <th>İşlemler</th>
+    </tr>
+    <tbody>
+        @foreach (var satis in Model)
+        {
+            <tr>
+                <td>@satis.SATISID</td>
+                <td>@satis.TBLURUNLER.URUNAD</td>
+                <td>@satis.TBLURUNLER.TBLKATEGORILER.KATEGORIAD</td>
+                <td>@satis.TBLMUSTERILER.MUSTERIAD @satis.TBLMUSTERILER.MUSTERISOYAD</td>
+                <td>@satis.ADET</td>
+                <td>@satis.TBLURUNLER.FIYAT ₺</td>
+                <td>@satis.FIYAT ₺</td>
+                <td>
+                    <div class="btn-group" style="gap: 5px;">
+                        <a href="/Satis/SatisGetir/@satis.SATISID" class="btn btn-success">
+                            <i class="fas fa-edit"></i> Güncelle
+                        </a>
+                        <a href="/Satis/Sil/@satis.SATISID"
+                           class="btn btn-danger"
+                           onclick="return confirm('Satış kaydını silmek istediğinize emin misiniz? Bu işlem stok miktarını da güncelleyecektir.');">
+                            <i class="fas fa-trash"></i> Sil
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-end">
+    <a href="/Satis/YeniSatis" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Yeni Satış
+    </a>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#SearchString").keypress(function (e) {
+                if (e.which == 13) {
+                    $(this).closest("form").submit();
+                }
+            });
+        });
+    </script>
+}

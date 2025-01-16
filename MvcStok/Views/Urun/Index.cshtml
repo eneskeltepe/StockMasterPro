@@ -1,0 +1,95 @@
+@using MvcStok.Models.Entity
+@model IEnumerable<TBLURUNLER>
+@{
+    ViewBag.Title = "Ürünler";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!-- Arama Formu -->
+<div class="card mt-3">
+    <div class="card-body">
+        @using (Html.BeginForm("Index", "Urun", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="input-group w-100">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Ürün adı veya kategori ara..." })
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Ara
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="d-flex justify-content-end mt-3 mb-3">
+    <a href="/Urun/YeniUrun" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Yeni Ürün
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ürün Adı</th>
+                        <th>Kategori</th>
+                        <th>Marka</th>
+                        <th>Stok</th>
+                        <th>Fiyat</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var urun in Model)
+                    {
+                        <tr>
+                            <td>@urun.URUNID</td>
+                            <td>@urun.URUNAD</td>
+                            <td>@urun.TBLKATEGORILER.KATEGORIAD</td>
+                            <td>@urun.MARKA</td>
+                            <td>
+                                @if (urun.STOK <= 10)
+                                {
+                                    <span class="badge badge-danger">@urun.STOK</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-success">@urun.STOK</span>
+                                }
+                            </td>
+                            <td>₺@urun.FIYAT</td>
+                            <td>
+                                <div class="btn-group" style="gap: 5px;">
+                                    <a href="/Urun/UrunGetir/@urun.URUNID" class="btn btn-success">
+                                        <i class="fas fa-edit"></i> Güncelle
+                                    </a>
+                                    <a href="/Urun/Sil/@urun.URUNID"
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Bu ürünü silmek istediğinize emin misiniz?');">
+                                        <i class="fas fa-trash"></i> Sil
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#SearchString").keypress(function (e) {
+                if (e.which == 13) {
+                    $(this).closest("form").submit();
+                }
+            });
+        });
+    </script>
+}

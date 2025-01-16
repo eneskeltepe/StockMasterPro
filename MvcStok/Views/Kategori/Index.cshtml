@@ -1,0 +1,70 @@
+@using MvcStok.Models.Entity
+@model IEnumerable<TBLKATEGORILER>
+@{
+    ViewBag.Title = "Kategoriler";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!-- Arama Formu -->
+<div class="card mt-3">
+    <div class="card-body">
+        @using (Html.BeginForm("Index", "Kategori", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="input-group w-100">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Kategori adı ara..." })
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Ara
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<table class="table table-bordered mt-3">
+    <tr>
+        <th>ID</th>
+        <th>Kategori Adı</th>
+        <th>İşlemler</th>
+    </tr>
+    <tbody>
+        @foreach (var kategori in Model)
+        {
+            <tr>
+                <td>@kategori.KATEGORIID</td>
+                <td>@kategori.KATEGORIAD</td>
+                <td>
+                    <div class="btn-group" style="gap: 5px;">
+                        <a href="/Kategori/KategoriGetir/@kategori.KATEGORIID" class="btn btn-success">
+                            <i class="fas fa-edit"></i> Güncelle
+                        </a>
+                        <a href="/Kategori/Sil/@kategori.KATEGORIID"
+                           class="btn btn-danger"
+                           onclick="return confirm('Bu kategoriyi silmek istediğinize emin misiniz?');">
+                            <i class="fas fa-trash"></i> Sil
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-end">
+    <a href="/Kategori/YeniKategori" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Yeni Kategori
+    </a>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#SearchString").keypress(function (e) {
+                if (e.which == 13) {
+                    $(this).closest("form").submit();
+                }
+            });
+        });
+    </script>
+}

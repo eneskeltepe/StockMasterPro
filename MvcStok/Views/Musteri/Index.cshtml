@@ -1,0 +1,72 @@
+@using MvcStok.Models.Entity
+@model IEnumerable<TBLMUSTERILER>
+@{
+    ViewBag.Title = "Müşteriler";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!-- Arama Formu -->
+<div class="card mt-3">
+    <div class="card-body">
+        @using (Html.BeginForm("Index", "Musteri", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="input-group w-100">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Müşteri adı veya soyadı ara..." })
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Ara
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<table class="table table-bordered mt-3">
+    <tr>
+        <th>ID</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>İşlemler</th>
+    </tr>
+    <tbody>
+        @foreach (var musteri in Model)
+        {
+            <tr>
+                <td>@musteri.MUSTERIID</td>
+                <td>@musteri.MUSTERIAD</td>
+                <td>@musteri.MUSTERISOYAD</td>
+                <td>
+                    <div class="btn-group" style="gap: 5px;">
+                        <a href="/Musteri/MusteriGetir/@musteri.MUSTERIID" class="btn btn-success">
+                            <i class="fas fa-edit"></i> Güncelle
+                        </a>
+                        <a href="/Musteri/Sil/@musteri.MUSTERIID" 
+                           class="btn btn-danger"
+                           onclick="return confirm('Bu müşteriyi silmek istediğinize emin misiniz?');">
+                            <i class="fas fa-trash"></i> Sil
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-end">
+    <a href="/Musteri/YeniMusteri" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Yeni Müşteri
+    </a>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#SearchString").keypress(function (e) {
+                if (e.which == 13) {
+                    $(this).closest("form").submit();
+                }
+            });
+        });
+    </script>
+}
